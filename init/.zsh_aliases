@@ -1,0 +1,4 @@
+alias battery='upower -i $(upower -e | grep BAT) | grep --color=never -E "state|to\ full|to\ empty|percentage|capacity"'
+alias rsleep='systemctl suspend'
+alias hsleep='systemctl hibernate'
+
