@@ -257,4 +257,11 @@ if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 
+echo "Getting aliases"
 source ~/Portal/init/.zsh_aliases
+
+echo "Initiating: updatedb + locate"
+sudo updatedb
+
+echo "Activating bluetooth"
+sudo systemctl start bluetooth.service
