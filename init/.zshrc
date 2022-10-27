@@ -257,4 +257,4 @@ if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 
-source ~/init/.zsh_aliases
+source ~/Portal/init/.zsh_aliases
