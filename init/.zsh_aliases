@@ -1,4 +1,12 @@
 alias battery='upower -i $(upower -e | grep BAT) | grep --color=never -E "state|to\ full|to\ empty|percentage|capacity"'
+alias batterydetail='upower -i $(upower -e | grep BAT)'
+
 alias rsleep='systemctl suspend'
 alias hsleep='systemctl hibernate'
-alias zshark='source Portal/init/.zshrc'
+
+alias zshark='source ~/Portal/init/.zshrc'
+alias zoveride='cat ~/Portal/init/.zshrc > ~/.zshrc'
+
+alias bt1='echo "Activating bluetooth"; sudo systemctl start bluetooth.service'
+alias bt0='echo "Deactivating bluetooth"; sudo systemctl stop bluetooth.service'
+alias tdl='xdg-open https://to-do.live.com/tasks/'
