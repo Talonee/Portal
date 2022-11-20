@@ -260,5 +260,3 @@ fi
 echo "Getting aliases"
 source ~/Portal/init/.zsh_aliases
 
-echo "Initiating: updatedb + locate"
-sudo updatedb
