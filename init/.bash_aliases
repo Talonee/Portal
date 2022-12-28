@@ -3,6 +3,7 @@ alias batterydetail='upower -i $(upower -e | grep BAT)'
 
 alias rsleep='systemctl suspend'
 alias hsleep='systemctl hibernate'
+alias shutdown='systemctl poweroff'
 
 alias zshark='source ~/Portal/init/.zshrc'
 alias zoveride='cat ~/Portal/init/.zshrc > ~/.zshrc'
