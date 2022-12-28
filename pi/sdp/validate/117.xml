@@ -1,0 +1,26 @@
+<annotation>
+	<folder>validate</folder>
+	<filename>117.jpg</filename>
+	<path>/home/halocaridina/Downloads/www.google.com/validate/117.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1080</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>grass</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2</xmin>
+			<ymin>2</ymin>
+			<xmax>1080</xmax>
+			<ymax>640</ymax>
+		</bndbox>
+	</object>
+</annotation>
