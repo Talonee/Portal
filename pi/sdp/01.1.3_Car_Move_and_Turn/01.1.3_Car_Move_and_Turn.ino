@@ -30,17 +30,19 @@ void loop() {
       case 1:
         //Move back
         motorRun(-50, -50);
+	break;
       case 2:
         //Turn left
         motorRun(-50, 50);
+	break;
       case 3:
         //Turn right
         motorRun(50, -50);
+	break;
       default:
         //Stop
         motorRun(0, 0);
-        break;;
-      
+        break;
     }
   }
 }
