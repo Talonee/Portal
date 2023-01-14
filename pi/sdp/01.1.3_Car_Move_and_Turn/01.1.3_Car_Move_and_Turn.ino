@@ -18,6 +18,8 @@ void setup() {
 }
 
 void loop() {
+  int rate = 75;
+  
   if (Serial.available() > 0) {
     int mv = Serial.read() - '0';
 
@@ -25,23 +27,32 @@ void loop() {
     switch (mv) {
       case 0:
         //Move forward
-        motorRun(50, 50);
+        motorRun(rate, rate);
+        Serial.print("up\n");
         break;
       case 1:
         //Move back
-        motorRun(-50, -50);
-	break;
+        motorRun(-rate, -rate);
+        Serial.print("down\n");
+        break;
       case 2:
         //Turn left
-        motorRun(-50, 50);
-	break;
+        motorRun(-rate, rate);
+        Serial.print("left\n");
+        break;
       case 3:
         //Turn right
-        motorRun(50, -50);
-	break;
+        motorRun(rate, -rate);
+        Serial.print("right\n");
+        break;
+      case 4:
+        //Stop
+        motorRun(0, 0);        
+        Serial.print("stop\n");
+        break;
       default:
         //Stop
-        motorRun(0, 0);
+//        motorRun(0, 0);
         break;
     }
   }

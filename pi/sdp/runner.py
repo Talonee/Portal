@@ -8,7 +8,7 @@ if __name__ == '__main__':
     ser.reset_input_buffer()
 
     while True:
-        for mv in range(4):
+        for mv in range(5):
         #mv = 1  # 0123 - T L D R
 
             # send int via Serial requires conversion to str(), then encode('utf-8')
