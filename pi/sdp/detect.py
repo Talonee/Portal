@@ -22,9 +22,11 @@ from tflite_support.task import processor
 from tflite_support.task import vision
 import utils
 
+import serial
+
 
 def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
-        enable_edgetpu: bool) -> None:
+        enable_edgetpu: bool, ser: serial.Serial) -> None:
   """Continuously run inference on images acquired from the camera.
 
   Args:
@@ -46,11 +48,11 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
   cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
   # Visualization parameters
-  row_size = 20  # pixels
+  row_size = 22  # pixels
   left_margin = 24  # pixels
-  text_color = (0, 0, 255)  # red
-  font_size = 1
-  font_thickness = 1
+  text_color = (128, 0, 255)  # magenta # red
+  font_size = 1.2
+  font_thickness = 2
   fps_avg_frame_count = 10
 
   # Initialize the object detection model
@@ -83,7 +85,7 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     detection_result = detector.detect(input_tensor)
 
     # Draw keypoints and edges on input image
-    image = utils.visualize(image, detection_result)
+    image = utils.visualize(image, detection_result, ser)
 
     # Calculate the FPS
     if counter % fps_avg_frame_count == 0:
@@ -121,13 +123,13 @@ def main():
       help='Width of frame to capture from camera.',
       required=False,
       type=int,
-      default=640)
+      default=640) # SD:640x480 HD:1280x720
   parser.add_argument(
       '--frameHeight',
       help='Height of frame to capture from camera.',
       required=False,
       type=int,
-      default=480)
+      default=480) # SD:640x480 HD:1280x720
   parser.add_argument(
       '--numThreads',
       help='Number of CPU threads to run the model.',
@@ -142,9 +144,13 @@ def main():
       default=False)
   args = parser.parse_args()
 
+  ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+  ser.reset_input_buffer()
+
   run(args.model, int(args.cameraId), args.frameWidth, args.frameHeight,
-      int(args.numThreads), bool(args.enableEdgeTPU))
+      int(args.numThreads), bool(args.enableEdgeTPU), ser)
 
 
 if __name__ == '__main__':
   main()
+

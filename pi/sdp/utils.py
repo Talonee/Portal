@@ -1,32 +1,26 @@
-# Copyright 2021 The TensorFlow Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 """Utility functions to display the pose detection results."""
+#!/usr/bin/env python3
 
 import cv2
 import numpy as np
 from tflite_support.task import processor
 
+import serial
+import time
+
 _MARGIN = 10  # pixels
 _ROW_SIZE = 10  # pixels
 _FONT_SIZE = 1
 _FONT_THICKNESS = 1
-_TEXT_COLOR = (0, 0, 255)  # red
+_TEXT_COLOR = (0, 0, 255)  # BG_Red_
+
+last_sent = 4
 
 
 def visualize(
     image: np.ndarray,
     detection_result: processor.DetectionResult,
+    ser: serial.Serial
 ) -> np.ndarray:
   """Draws bounding boxes on the input image and return it.
 
@@ -37,21 +31,68 @@ def visualize(
   Returns:
     Image with bounding boxes.
   """
+  
+  global last_sent
+  
+  if (not detection_result.detections) and (last_sent != 4):
+    last_sent = 4
+
   for detection in detection_result.detections:
+    # Define colors for different objects
+    category = detection.categories[0]
+    category_name = category.category_name
+    
+    if (category_name == "grass"):
+      text_color = (128, 0, 255) # magenta
+    elif (category_name == "dirt"):
+      text_color = (251, 148, 55) # sky
+    else:
+      text_color = _TEXT_COLOR  # red
+      text_color = (205, 251, 83) # turquoise
+		
     # Draw bounding_box
     bbox = detection.bounding_box
     start_point = bbox.origin_x, bbox.origin_y
     end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
-    cv2.rectangle(image, start_point, end_point, _TEXT_COLOR, 3)
+    cv2.rectangle(image, start_point, end_point, text_color, 3)
 
     # Draw label and score
-    category = detection.categories[0]
-    category_name = category.category_name
     probability = round(category.score, 2)
     result_text = category_name + ' (' + str(probability) + ')'
     text_location = (_MARGIN + bbox.origin_x,
                      _MARGIN + _ROW_SIZE + bbox.origin_y)
     cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
-                _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
+                _FONT_SIZE, text_color, _FONT_THICKNESS)
+    
+    if (category_name == "grass"): # encapsulate movement to only grass detection
+      last_sent = serial_output(bbox, ser)
+
+    ser.write(str(last_sent).encode('utf-8'))
 
   return image
+
+def serial_output(bbox: np.ndarray, ser: serial.Serial) -> int:
+  # SD:640x480 HD:1280x720
+  width = 640
+  bbox_midp = bbox.origin_x + bbox.width / 2
+  safe_lim_r = (width / 2 + 20)
+  safe_lim_l = (width / 2 - 20)
+
+  # Send signal to move in correspondent to relative bounding box position
+  # Middle range buffer: 10 pixels left & right from center
+  if (bbox_midp < safe_lim_r) and (bbox_midp > safe_lim_l): # object in safe zone
+    mv = 0
+  elif (bbox_midp < safe_lim_l): # object on left
+    mv = 1
+  elif (bbox_midp > safe_lim_r): # object on right
+    mv = 3
+  else:
+    mv = 4
+  #elif (bbox.origin_x <= 0) or (bbox.origin_x >= 640): 
+    #mv = 4
+
+
+  # send int via Serial requires conversion to str(), then encode('utf-8')
+  #ser.write(str(mv).encode('utf-8'))
+
+  return mv
