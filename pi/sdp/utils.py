@@ -14,8 +14,6 @@ _FONT_SIZE = 1
 _FONT_THICKNESS = 1
 _TEXT_COLOR = (0, 0, 255)  # BG_Red_
 
-last_sent = 4
-
 
 def visualize(
     image: np.ndarray,
@@ -32,10 +30,7 @@ def visualize(
     Image with bounding boxes.
   """
   
-  global last_sent
-  
-  if (not detection_result.detections) and (last_sent != 4):
-    last_sent = 4
+  grass_detected = False
 
   for detection in detection_result.detections:
     # Define colors for different objects
@@ -65,9 +60,26 @@ def visualize(
                 _FONT_SIZE, text_color, _FONT_THICKNESS)
     
     if (category_name == "grass"): # encapsulate movement to only grass detection
-      last_sent = serial_output(bbox, ser)
+      grass_detected = True;
+      mv_code = serial_output(bbox, ser)
 
-    ser.write(str(last_sent).encode('utf-8'))
+    cv2.circle(image, (round(bbox.origin_x + bbox.width / 2), round(bbox.origin_y + bbox.height / 2)), 
+               10, (102, 255, 255), -1)
+
+  if not grass_detected:
+    # Perform a 360 scan until grass is detected
+    ser.write(str(4).encode('utf-8'))
+    time.sleep(2)
+    mv_code = 1
+
+  # send int via Serial requires conversion to str(), then encode('utf-8')
+  ser.write(str(mv_code).encode('utf-8'))
+
+
+  width = 640
+  height = 480
+  cv2.rectangle(image, (round(width / 2 - 50), round(height / 2 - 50)), 
+                (round(width / 2 + 50), round(height / 2 + 50)), (102, 255, 255), 3)
 
   return image
 
@@ -75,24 +87,18 @@ def serial_output(bbox: np.ndarray, ser: serial.Serial) -> int:
   # SD:640x480 HD:1280x720
   width = 640
   bbox_midp = bbox.origin_x + bbox.width / 2
-  safe_lim_r = (width / 2 + 20)
-  safe_lim_l = (width / 2 - 20)
+  safe_lim_r = (width / 2 + 50)
+  safe_lim_l = (width / 2 - 50)
 
   # Send signal to move in correspondent to relative bounding box position
   # Middle range buffer: 10 pixels left & right from center
   if (bbox_midp < safe_lim_r) and (bbox_midp > safe_lim_l): # object in safe zone
     mv = 0
-  elif (bbox_midp < safe_lim_l): # object on left
-    mv = 1
-  elif (bbox_midp > safe_lim_r): # object on right
+  elif (bbox_midp < safe_lim_l): # object on left, turn right (img reversed)
     mv = 3
+  elif (bbox_midp > safe_lim_r): # object on right, turn left (img reversed)
+    mv = 1
   else:
     mv = 4
-  #elif (bbox.origin_x <= 0) or (bbox.origin_x >= 640): 
-    #mv = 4
-
-
-  # send int via Serial requires conversion to str(), then encode('utf-8')
-  #ser.write(str(mv).encode('utf-8'))
 
   return mv
