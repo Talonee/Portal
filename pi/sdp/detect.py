@@ -129,7 +129,7 @@ def main():
       help='Height of frame to capture from camera.',
       required=False,
       type=int,
-      default=480) # SD:640x480 HD:1280x720
+      default=75) # SD:640x480 HD:1280x720
   parser.add_argument(
       '--numThreads',
       help='Number of CPU threads to run the model.',

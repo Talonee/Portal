@@ -63,21 +63,23 @@ def visualize(
       grass_detected = True;
       mv_code = serial_output(bbox, ser)
 
+    # Debug
     cv2.circle(image, (round(bbox.origin_x + bbox.width / 2), round(bbox.origin_y + bbox.height / 2)), 
                10, (102, 255, 255), -1)
 
-  if not grass_detected:
-    # Perform a 360 scan until grass is detected
-    ser.write(str(4).encode('utf-8'))
-    time.sleep(2)
+  # Stop car if no objects detected. Scan surrounding if objs detected but no grass
+  if not detection_result.detections:
+    mv_code = 4
+  elif not grass_detected:
     mv_code = 1
 
   # send int via Serial requires conversion to str(), then encode('utf-8')
   ser.write(str(mv_code).encode('utf-8'))
 
 
+  # Debug 
   width = 640
-  height = 480
+  height = 350
   cv2.rectangle(image, (round(width / 2 - 50), round(height / 2 - 50)), 
                 (round(width / 2 + 50), round(height / 2 + 50)), (102, 255, 255), 3)
 
@@ -91,7 +93,7 @@ def serial_output(bbox: np.ndarray, ser: serial.Serial) -> int:
   safe_lim_l = (width / 2 - 50)
 
   # Send signal to move in correspondent to relative bounding box position
-  # Middle range buffer: 10 pixels left & right from center
+  # Middle range buffer: 50 pixels left & right from center
   if (bbox_midp < safe_lim_r) and (bbox_midp > safe_lim_l): # object in safe zone
     mv = 0
   elif (bbox_midp < safe_lim_l): # object on left, turn right (img reversed)
