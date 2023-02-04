@@ -1,0 +1,26 @@
+<annotation>
+	<folder>www.google.com</folder>
+	<filename>30.jpg</filename>
+	<path>/home/halocaridina/Downloads/www.google.com/30.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2560</width>
+		<height>1920</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>grass</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>9</xmin>
+			<ymin>840</ymin>
+			<xmax>2560</xmax>
+			<ymax>1920</ymax>
+		</bndbox>
+	</object>
+</annotation>
