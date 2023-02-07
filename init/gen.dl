@@ -1,4 +1,5 @@
 sudo apt install cherrytree
 sudo apt install neofetch
 sudo apt install neovim
-
+sudo apt install fortune
+sudo apt install lolcat
