@@ -2,13 +2,14 @@ alias battery='upower -i $(upower -e | grep BAT) | grep --color=never -E "state|
 alias batterydetail='upower -i $(upower -e | grep BAT)'
 
 alias shutdown='shutdown -h'
+alias la='ls -a'
 
 alias uploc='echo "Updatedb + locate"; sudo updatedb'
 alias tdl='xdg-open https://to-do.live.com/tasks/'
 alias onedrive='xdg-open https://onedrive.live.com'
 alias spotify='xdg-open https://open.spotify.com'
 
-alias frog="source ~/Portal/init/frog.sh | lolcat"
+alias frog="source ~/Portal/init/frog.sh | lolcat && fortune | lolcat"
 
 alias clock="watch -n1 vcgencmd measure_clock arm"
 alias temp="watch -n1 vcgencmd measure_temp"

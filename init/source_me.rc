@@ -1,6 +1,0 @@
-shell=~/.zshrc
-
-echo "\n" >> $shell
-echo "source ~/Portal/init/frog.sh | lolcat" >> $shell 
-echo "fortune | lolcat" >> $shell
-echo "source ~/Portal/init/.aliases" >> $shell
