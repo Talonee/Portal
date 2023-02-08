@@ -9,3 +9,6 @@ alias onedrive='xdg-open https://onedrive.live.com'
 alias spotify='xdg-open https://open.spotify.com'
 
 alias frog="source ~/Portal/init/frog.sh | lolcat"
+
+alias clock="watch -n1 vcgencmd measure_clock arm"
+alias temp="watch -n1 vcgencmd measure_temp"
