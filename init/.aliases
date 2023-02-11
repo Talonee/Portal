@@ -15,3 +15,5 @@ alias frog="source ~/Portal/init/frog.sh | lolcat && fortune | lolcat"
 
 alias clock="watch -n1 vcgencmd measure_clock arm"
 alias temp="watch -n1 vcgencmd measure_temp"
+
+alias bat="batcat"

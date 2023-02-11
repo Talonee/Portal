@@ -4,6 +4,9 @@ Download nerd font (Caskaydia Cove): https://www.nerdfonts.com/font-downloads
 
 Replicate bashbunni's Tmux Setup: https://www.youtube.com/watch?v=78FjNkrPn5Y
 
+Replicate bashbunni's Neovim Setup: https://www.youtube.com/watch?v=ZvhzrltuA9U&list=PL3PYGQRVAjrMxP5HK45CTnR7Yv-QYR1Qp&index=1
+ - Where she does :PlugInstall, run :PackerUpdate and :PackerSync instead.
+
 Download gradient timer: https://github.com/caarlos0/timer
 
 Download oh-my-zsh: https://ohmyz.sh/#install
