@@ -2,6 +2,8 @@ alias battery='upower -i $(upower -e | grep BAT) | grep --color=never -E "state|
 alias batterydetail='upower -i $(upower -e | grep BAT)'
 
 alias shutdown='shutdown -h'
+alias sleep='systemctl suspend'
+alias hibernate='systemctl hibernate'
 alias la='ls -a'
 
 alias uploc='echo "Updatedb + locate"; sudo updatedb'
