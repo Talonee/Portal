@@ -7,9 +7,21 @@ Replicate bashbunni's Tmux Setup: https://www.youtube.com/watch?v=78FjNkrPn5Y
 Replicate bashbunni's Neovim Setup: https://www.youtube.com/watch?v=ZvhzrltuA9U&list=PL3PYGQRVAjrMxP5HK45CTnR7Yv-QYR1Qp&index=1
  - Where she does :PlugInstall, run :PackerUpdate and :PackerSync instead.
 
+More Neovim customization:
+ - `:set norelativenumber` || `:set relativenumber` to adjust line counts
+ - `nvim ~/.config/nvim/after/plugin/plugins.lua` to install new plugins
+ - `nvim ~/.config/nvim/init.lua` to ensure custom.lua is referenced
+ - `nvim ~/.config/nvim/lua/me/custom.lua` to modify plugins' setup
+
 Download gradient timer: https://github.com/caarlos0/timer
 
 Download oh-my-zsh: https://ohmyz.sh/#install
+
+Install zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md 
+ - Download catppuccin's theme: https://github.com/catppuccin/zsh-syntax-highlighting
+ - Follow instructions, then in .zshrc, add the following lines in this order:
+   * source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh 
+   * plugins=(git zsh-syntax-highlighting)
 
 Download spotify-tui & dracula theme: 
  - https://github.com/Rigellute/spotify-tui#configuration
