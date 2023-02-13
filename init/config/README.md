@@ -37,7 +37,7 @@ Setup Spotify:
    * https://spotifyd.github.io/spotifyd/installation/Ubuntu.html
    * Exchange `cargo build --release` for `cargo build --release --no-default-features --features alsa_backend,dbus_keyring,dbus_mpris`
    * Afterward, run `cargo install --path . --locked`
- - Load `spotifyd.config` to auto-login & understanding how to set/retrieve passphrase:
+ - Load `~/.config/spotifyd/spotifyd.config` to auto-login & understanding how to set/retrieve passphrase:
    * https://spotifyd.github.io/spotifyd/config/File.html
    * https://www.chucknemeth.com/linux/security/keyring/secret-tool
  - **Run Spotify**
