@@ -28,5 +28,8 @@ A frame rate increase of 2 frames means 30%-50% improvement; such a change is no
 #### Approach 3: Remove color filter (red/yellow) and image masking
 Zero effects although thereotically expected. Regardless of whether our images are masked to be mostly black, white, or fully colored, the model scan images on a pixel-by-pixel basis, therefore, the output is all the same. Additionally, color filtering may be counterproductive/unnecessary as we want to avoid reliance on colors anyway and, instead, focus on learning the general shapes and compositions of *multiple* objects.
 
+#### Approach 4: Pi camera over webcam
+Switching out the webcam for the Pi camera, no object detection model, frames rate breaks to a record 120-130 FPS. Interesting. Unfortunately, the FPS remain unchanged when applied the EfficientDet model(s).
+
 ### Solution:
 At best, we use the ultrasonic sensors to determine movements and maintain a ~8 FPS performance for occasional object detection when we need to identify if the objects ahead is potentially hazardous or not.

@@ -1,20 +1,14 @@
 from imutils.video import VideoStream
 import imutils, time, cv2
 
-import argparse
-import sys
-import time
+import argparse, sys, serial
 
-import cv2
 from tflite_support.task import core
 from tflite_support.task import processor
 from tflite_support.task import vision
 import utils
 
-import serial
-
-# initialize the video stream and allow the camera sensor to
-# warmup
+# Initialize the video stream and allow the camera sensor to warmup
 vs = VideoStream(usePiCamera=1).start()
 time.sleep(2.0)
 
@@ -26,13 +20,6 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     counter, fps = 0, 0
     start_time = time.time()
   
-    # Start capturing video input from the camera
-    #cap = cv2.VideoCapture(camera_id)
-    #vs = VideoStream(usePiCamera=1).start()
-    #vs.set(cv2.CAP_PROP_FRAME_WIDTH, width)
-    #vs.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
-    #time.sleep(2.0)
-
     # Visualization parameters
     row_size = 22  # pixels
     left_margin = 24  # pixels
@@ -49,27 +36,26 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     options = vision.ObjectDetectorOptions(
         base_options=base_options, detection_options=detection_options)
     detector = vision.ObjectDetector.create_from_options(options)
-
+    import numpy as np
     while True:
         frame = vs.read()
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-        #frame_bigger = cv2.resize(frame, (500,500), interpolation = cv2.INTER_AREA)
+        #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         counter += 1
         image = cv2.flip(frame, 1)
-        image = cv2.resize(frame, (width,height), interpolation = cv2.INTER_AREA)
-
-
-
+        image = cv2.resize(image, (width,height), interpolation = cv2.INTER_AREA)
+        
+        # Removing color channels do not affect performance. 0-blue, 1-red, 2-green
+        #image[:,:,0] = np.zeros([image.shape[0], image.shape[1]])
+        
         # Convert the image from BGR to RGB as required by the TFLite model.
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        #rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        
+
         # Create a TensorImage object from the RGB image.
         input_tensor = vision.TensorImage.create_from_array(rgb_image)
     
-        # Run object detection estimation using the model.
+        # Run object detection estimation using the model. 
+        # Brain of the operation, causal of 8 FPS.
         detection_result = detector.detect(input_tensor)
     
         # Draw keypoints and edges on input image
@@ -87,22 +73,13 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
         cv2.putText(image, fps_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                     font_size, text_color, font_thickness)
 
-
-
-        # Stop the program if the ESC key is pressed.
-        if cv2.waitKey(1) == 27:
+        # (Q)uit the program if key is pressed.
+        if cv2.waitKey(1) & 0xFF == ord('q'):
           break
-        cv2.imshow('object_detector', image)
+        cv2.imshow('Live cam', image)
 
-    cap.release()
+    cv2.VideoCapture(0).release()
     cv2.destroyAllWindows()
-
-        #cv2.imshow("Live Video", image)
-        #cv2.waitKey(50)
-
-
-
-
 
 def main():
   parser = argparse.ArgumentParser(
@@ -126,7 +103,7 @@ def main():
       help='Height of frame to capture from camera.',
       required=False,
       type=int,
-      default=360) # SD:640x480 HD:1280x720
+      default=480) # SD:640x480 HD:1280x720
   parser.add_argument(
       '--numThreads',
       help='Number of CPU threads to run the model.',
