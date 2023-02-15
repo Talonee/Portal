@@ -1,3 +1,5 @@
+#!usr/bin/zsh
+
 alias battery='upower -i $(upower -e | grep BAT) | grep --color=never -E "state|to\ full|to\ empty|percentage|capacity"'
 alias batterydetail='upower -i $(upower -e | grep BAT)'
 
@@ -5,7 +7,7 @@ alias shutdown='shutdown -h'
 alias sleep='systemctl suspend'
 alias hibernate='systemctl hibernate'
 alias la='ls -a'
-
+alias neofetch='neofetch --ascii_distro MacOS'
 alias uploc='echo "Updatedb + locate"; sudo updatedb'
 alias tdl='xdg-open https://to-do.live.com/tasks/'
 alias onedrive='xdg-open https://onedrive.live.com'

@@ -34,14 +34,14 @@ if not ok then return end
 treesitter.setup { ensure_installed = "all", highlight = { enable = true } }
 
 -- keymaps
-vim.keymap.set("n", "<leader>p", "<cmd>Glow<cr>")
 nmap { "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>" }
 nmap { "<leader>lg", "<cmd>Telescope live_grep<CR>" }
-nmap { "<leader>dl", "<cmd>Telescope diagnostics<cr>" }
 
 -- custom key maps
 nmap { "<leader>ff", "<cmd>Telescope find_files<cr>" }
 nmap { "<leader>fb", "<cmd>Telescope file_browser<cr>" }
+nmap { "<leader>rf", ":RunFile<CR>" }
+nmap { "<leader>rc", ":RunClose<CR>" }
 
 -- navigation
 nmap { "L", "<cmd>bnext<cr>" }

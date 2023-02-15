@@ -62,3 +62,11 @@ require('dracula').setup({
 })
 
 vim.cmd [[colorscheme dracula]]
+
+-- Enable running python within neovim
+require('code_runner').setup({
+    -- put here the commands by filetype
+    filetype = {
+        python = "python3 -u",
+    },
+})

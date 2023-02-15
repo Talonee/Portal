@@ -11,111 +11,115 @@ vim.cmd([[
 ]])
 
 return require('packer').startup(function(use)
-          use 'wbthomason/packer.nvim'
-          use { 'catppuccin/nvim', as = 'catppuccin' }
+      use 'wbthomason/packer.nvim'
+      use { 'catppuccin/nvim', as = 'catppuccin' }
 
-          --Treesitter
-          use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-          use 'williamboman/mason.nvim'
+      --Treesitter
+      use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+      use 'williamboman/mason.nvim'
 
-          --Markdown preview
-          use 'ellisonleao/glow.nvim'
-          use 'simrat39/symbols-outline.nvim'
-          -- install without yarn or npm
-          use({
-              "iamcco/markdown-preview.nvim",
-              run = function() vim.fn["mkdp#util#install"]() end,
-          })
+      --Markdown preview
+      use 'ellisonleao/glow.nvim'
+      use 'simrat39/symbols-outline.nvim'
+      -- install without yarn or npm
+      use({
+          "iamcco/markdown-preview.nvim",
+          run = function() vim.fn["mkdp#util#install"]() end,
+      })
 
-          --Language packs
-          use 'sheerun/vim-polyglot'
+      --Language packs
+      use 'sheerun/vim-polyglot'
 
-          --Nvim motions
-          use {
-              'phaazon/hop.nvim',
-              branch = 'v2',
-              requires = { 'nvim-lua/plenary.nvim' },
-              config = function()
-                    require 'hop'.setup { keys = 'etovxpqdgfblzhckisuran' }
-              end
-          }
+      --Nvim motions
+      use {
+          'phaazon/hop.nvim',
+          branch = 'v2',
+          requires = { 'nvim-lua/plenary.nvim' },
+          config = function()
+            require 'hop'.setup { keys = 'etovxpqdgfblzhckisuran' }
+          end
+      }
 
-          --LSP autocomplete
-          use 'hrsh7th/nvim-cmp'
-          use 'hrsh7th/cmp-nvim-lsp'
-          use 'hrsh7th/cmp-buffer'
-          use 'hrsh7th/cmp-path'
-          use 'L3MON4D3/LuaSnip'
-          use 'saadparwaiz1/cmp_luasnip'
-          use 'neovim/nvim-lspconfig'
+      --LSP autocomplete
+      use 'hrsh7th/nvim-cmp'
+      use 'hrsh7th/cmp-nvim-lsp'
+      use 'hrsh7th/cmp-buffer'
+      use 'hrsh7th/cmp-path'
+      use 'L3MON4D3/LuaSnip'
+      use 'saadparwaiz1/cmp_luasnip'
+      use 'neovim/nvim-lspconfig'
 
-          -- LSP Saga ????
-          use({
-              "glepnir/lspsaga.nvim",
-              branch = "main",
-              config = function()
-                    require('lspsaga').setup({})
-              end,
-          })
+      -- LSP Saga ????
+      use({
+          "glepnir/lspsaga.nvim",
+          branch = "main",
+          config = function()
+            require('lspsaga').setup({})
+          end,
+      })
 
-          --File browsing
-          use 'nvim-telescope/telescope-file-browser.nvim'
+      --File browsing
+      use 'nvim-telescope/telescope-file-browser.nvim'
 
-          --Buffer navigation
-          use 'nvim-lualine/lualine.nvim'
+      --Buffer navigation
+      use 'nvim-lualine/lualine.nvim'
 
-          --Haskell
-          use 'neovimhaskell/haskell-vim'
-          use 'alx741/vim-hindent'
+      --Haskell
+      use 'neovimhaskell/haskell-vim'
+      use 'alx741/vim-hindent'
 
-          --debugging
-          use 'mfussenegger/nvim-dap'
-          use 'leoluz/nvim-dap-go'
-          use 'rcarriga/nvim-dap-ui'
-          use 'theHamsta/nvim-dap-virtual-text'
-          use 'nvim-telescope/telescope-dap.nvim'
+      --debugging
+      use 'mfussenegger/nvim-dap'
+      use 'leoluz/nvim-dap-go'
+      use 'rcarriga/nvim-dap-ui'
+      use 'theHamsta/nvim-dap-virtual-text'
+      use 'nvim-telescope/telescope-dap.nvim'
 
-          --Grammar checking because I can't english
-          use 'rhysd/vim-grammarous'
+      --Grammar checking because I can't english
+      use 'rhysd/vim-grammarous'
 
-          --Telescope Requirements
-          use 'nvim-lua/popup.nvim'
-          use 'nvim-lua/plenary.nvim'
-          use 'nvim-telescope/telescope.nvim'
+      --Telescope Requirements
+      use 'nvim-lua/popup.nvim'
+      use 'nvim-lua/plenary.nvim'
+      use 'nvim-telescope/telescope.nvim'
 
-          --Telescope
-          use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+      --Telescope
+      use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-          --git diff
-          use 'sindrets/diffview.nvim'
+      --git diff
+      use 'sindrets/diffview.nvim'
 
-          --magit
-          use 'TimUntersberger/neogit'
+      --magit
+      use 'TimUntersberger/neogit'
 
-          --todo comments
-          use 'folke/todo-comments.nvim'
+      --todo comments
+      use 'folke/todo-comments.nvim'
 
-          --devicons
-          use 'kyazdani42/nvim-web-devicons'
+      --devicons
+      use 'kyazdani42/nvim-web-devicons'
 
-          --fullstack dev
-          use 'pangloss/vim-javascript' --JS support
-          use 'leafgarland/typescript-vim' --TS support
-          use 'maxmellon/vim-jsx-pretty' --JS and JSX syntax
-          use 'jparise/vim-graphql' --GraphQL syntax
-          use 'mattn/emmet-vim'
+      --fullstack dev
+      use 'pangloss/vim-javascript' --JS support
+      use 'leafgarland/typescript-vim' --TS support
+      use 'maxmellon/vim-jsx-pretty' --JS and JSX syntax
+      use 'jparise/vim-graphql' --GraphQL syntax
+      use 'mattn/emmet-vim'
 
-          -- le duck
-          use 'tamton-aquib/duck.nvim'
+      -- le duck
+      use 'tamton-aquib/duck.nvim'
 
-          -- custom plugins
-          use 'lewis6991/gitsigns.nvim'
-          use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides on blank lines
-          use {
-              'numToStr/Comment.nvim',
-              config = function()
-                    require('Comment').setup()
-              end
-          }
-          use 'Mofiqul/dracula.nvim'
+      -- custom plugins
+      use 'lewis6991/gitsigns.nvim'
+      use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides on blank lines
+      use {
+          'numToStr/Comment.nvim',
+          config = function()
+            require('Comment').setup()
+          end
+      }
+      use 'Mofiqul/dracula.nvim'
+      use {
+          'CRAG666/code_runner.nvim',
+          requires = 'nvim-lua/plenary.nvim'
+      }
     end)

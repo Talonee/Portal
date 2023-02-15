@@ -1,7 +1,6 @@
 from imutils.video import VideoStream
 import imutils, time, cv2
 
-
 import argparse
 import sys
 import time
@@ -51,10 +50,6 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
         base_options=base_options, detection_options=detection_options)
     detector = vision.ObjectDetector.create_from_options(options)
 
-
-
-
-
     while True:
         frame = vs.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -63,7 +58,7 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
 
         counter += 1
         image = cv2.flip(frame, 1)
-        image = frame_bigger = cv2.resize(frame, (width,height), interpolation = cv2.INTER_AREA)
+        image = cv2.resize(frame, (width,height), interpolation = cv2.INTER_AREA)
 
 
 
