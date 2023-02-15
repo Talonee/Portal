@@ -1,0 +1,14 @@
+@:  - repeat last Normal command
+L   - next buffer
+H   - previous buffer
+:bd - close curr buffer
+F   - find text/pattern and hop to it
+<>; - spawn duck
+<>: - spawn turtle
+<>' - cook spawns
+<>fb    - file browser
+<>tt    - tree toggle
+<>tf    - tree focus
+<>rf    - run current file
+<>rc    - run close
+C-f     - stronger text/pattern finder

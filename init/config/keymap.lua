@@ -35,11 +35,11 @@ treesitter.setup { ensure_installed = "all", highlight = { enable = true } }
 
 -- keymaps
 nmap { "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>" }
-nmap { "<leader>lg", "<cmd>Telescope live_grep<CR>" }
 
 -- custom key maps
-nmap { "<leader>ff", "<cmd>Telescope find_files<cr>" }
 nmap { "<leader>fb", "<cmd>Telescope file_browser<cr>" }
+nmap { "<leader>tt", "<cmd>NvimTreeFindFileToggle<cr>" }
+nmap { "<leader>tf", "<cmd>NvimTreeFocus<cr>" }
 nmap { "<leader>rf", ":RunFile<CR>" }
 nmap { "<leader>rc", ":RunClose<CR>" }
 
