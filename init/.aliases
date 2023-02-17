@@ -18,5 +18,9 @@ alias frog="source ~/Portal/init/frog.sh | lolcat && fortune | lolcat"
 alias clock="watch -n1 vcgencmd measure_clock arm"
 alias temp="watch -n1 vcgencmd measure_temp"
 
-alias bat="batcat"
 alias cmd="cat ~/Portal/init/.nvim_commands"
+alias notes="cherrytree ~/Portal/Notes.ctz"
+
+
+# Raspberry Pi
+alias label="python3 ~/labelImg/labelImg.py"

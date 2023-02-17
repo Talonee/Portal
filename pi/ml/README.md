@@ -33,3 +33,6 @@ Switching out the webcam for the Pi camera, no object detection model, frames ra
 
 ### Solution:
 At best, we use the ultrasonic sensors to determine movements and maintain a ~8 FPS performance for occasional object detection when we need to identify if the objects ahead is potentially hazardous or not.
+
+### Tools:
+- Install labelImg for labeling: https://gpiocc.github.io/learn/ml/2021/08/28/martin-ku-create-object-detection-dataset-with-labelimg.html
