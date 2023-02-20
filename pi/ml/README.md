@@ -38,11 +38,7 @@ The default processor for the Pi has been a 32-bit system, but we can boost the 
    - An Efficientdet0 model averaging around 8.5 FPS on the 32-bit system increases to an average 13.5 FPS on the 64-bit. A 58.82% increase, how about that?
 
 ### Solution:
-<<<<<<< HEAD
 Overall, only approaches 2, 4, 5, and 6 yielded some form of success that brings a meaningful addition to the project. Although 13 FPS proves to be more viable and elimiates the lagging effect, in lieu of using the machine learning model with the least accuracy, computer vision alone will not be the sole determiner to drive the autonomous vehicle. The set of 4 ultrasonic sensors will instead take on that role, while the 13 FPS performance is used for occasional object detection when we need to identify if the objects ahead is potentially hazardous.
-=======
-At best, we use the ultrasonic sensors to determine movements and maintain a ~8 FPS performance for occasional object detection when we need to identify if the objects ahead is potentially hazardous or not.
 
 ### Tools:
 - Install labelImg for labeling: https://gpiocc.github.io/learn/ml/2021/08/28/martin-ku-create-object-detection-dataset-with-labelimg.html
->>>>>>> c0c2e4ca8a5097c80dea310254738254cbb8f905
