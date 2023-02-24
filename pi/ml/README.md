@@ -1,3 +1,5 @@
+Link to repo: https://github.com/AutonomousLawnmower/computer-vision.git
+
 ## Context: 
 The desired outcome was to have the object detection model operate fast enough such that our lawnmower can navigate in real-time without much help from the sensors. A test was made to see how responsive the wheels are to the image capturing speed, the wheels moved continuously while the images output to 4-6 FPS. This difference results in the situation where the images haven't caught up to the actual, real-time position but the wheels continue to run at full speed due to the images being used as indicators--a undesirable lag. To circumvent this effect, researches and a few approaches were attempted to increase the frames output.
 

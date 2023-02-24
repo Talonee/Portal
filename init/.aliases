@@ -23,4 +23,4 @@ alias notes="cherrytree ~/Portal/Notes.ctz"
 
 
 # Raspberry Pi
-alias label="python3 ~/labelImg/labelImg.py"
+alias label="python /home/halocaridina/.local/bin/labelImg"
