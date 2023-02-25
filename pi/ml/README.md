@@ -44,3 +44,4 @@ Overall, only approaches 2, 4, 5, and 6 yielded some form of success that brings
 
 ### Tools:
 - Install labelImg for labeling: https://gpiocc.github.io/learn/ml/2021/08/28/martin-ku-create-object-detection-dataset-with-labelimg.html
+- Raspberry Pi 64-bit breaks the picamera completely and, along with it, legacy Python libraries that support it. Here is the alternative, PiCamera2: sudo apt install -y python3-picamera2

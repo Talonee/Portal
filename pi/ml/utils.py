@@ -18,7 +18,7 @@ _TEXT_COLOR = (0, 0, 255)  # BG_Red_
 def visualize(
     image: np.ndarray,
     detection_result: processor.DetectionResult,
-    ser: serial.Serial
+    #ser: serial.Serial
 ) -> np.ndarray:
   """Draws bounding boxes on the input image and return it.
 
@@ -61,20 +61,20 @@ def visualize(
     
     if (category_name == "grass"): # encapsulate movement to only grass detection
       grass_detected = True;
-      mv_code = serial_output(bbox, ser)
+      #mv_code = serial_output(bbox, ser)
 
     # Debug
     cv2.circle(image, (round(bbox.origin_x + bbox.width / 2), round(bbox.origin_y + bbox.height / 2)), 
                10, (102, 255, 255), -1)
 
   # Stop car if no objects detected. Scan surrounding if objs detected but no grass
-  if not detection_result.detections:
-    mv_code = 4
-  elif not grass_detected:
-    mv_code = 1
+  #if not detection_result.detections:
+  #  mv_code = 4
+  #elif not grass_detected:
+  #  mv_code = 1
 
   # send int via Serial requires conversion to str(), then encode('utf-8')
-  ser.write(str(mv_code).encode('utf-8'))
+  #ser.write(str(mv_code).encode('utf-8'))
 
 
   # Debug 

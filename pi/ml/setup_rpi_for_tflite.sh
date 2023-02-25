@@ -9,14 +9,14 @@ python3 --version
 
 # Install virtualenv and upgrade pip.
 python3 -m pip install --user --upgrade pip
-python3 -m pip install --user virtualenv
+#python3 -m pip install --user virtualenv
 
 # Create a Python virtual environment for the TFLite samples (optional but strongly recommended)
 # Avoid creating environments in a Github repo, content is too large
-python3 -m venv ~/tflite
+#python3 -m venv ~/tflite
 
 # Run this command whenever you open a new Terminal window/tab to activate the environment.
-source ~/tflite/bin/activate
+#source ~/tflite/bin/activate
 
 # Clone the TensorFlow example repository with the TFLite Raspberry Pi samples.
 # Assume repo is already cloned
