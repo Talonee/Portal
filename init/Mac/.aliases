@@ -1,0 +1,11 @@
+#!usr/bin/zsh
+
+alias la='ls -a'
+alias uploc='echo "Updatedb + locate"; sudo updatedb'
+alias spotify='xdg-open https://open.spotify.com'
+
+alias frog="source ~/OneDrive/Documents/Github/Portal/init/Mac/frog.zsh | lolcat && fortune | lolcat"
+
+alias cmd="cat ~/OneDrive/Documents/Github/Portal/init/.nvim_commands"
+
+alias portal="cd ~/OneDrive/Documents/Github/Portal/"
